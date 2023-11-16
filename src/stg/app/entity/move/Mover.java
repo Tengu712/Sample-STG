@@ -1,8 +1,7 @@
 package stg.app.entity.move;
 
+import stg.util.*;
+
 public interface Mover {
-    // it returns false, if it should be removed.
-    public boolean update();
-    public double getX();
-    public double getY();
+    void apply(Vec2 xy);
 }

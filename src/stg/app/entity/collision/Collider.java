@@ -1,29 +1,24 @@
 package stg.app.entity.collision;
 
+import stg.util.*;
+
 public class Collider {
-    private double x;
-    private double y;
+    private Vec2 xy;
     private double r;
 
-    public Collider(double r) {
-        this.x = 0.0;
-        this.y = 0.0;
+    public Collider(Vec2 xy, double r) {
+        this.xy = xy;
         this.r = r;
-    }
-
-    public void update(double x, double y) {
-        this.x = x;
-        this.y = y;
     }
 
     public boolean isHit(Hitable opponent) {
         final Collider oc = opponent.getCollider();
-        final double ox = oc.x;
-        final double oy = oc.y;
+        final double ox = oc.xy.getX();
+        final double oy = oc.xy.getY();
         final double or = oc.r;
 
-        final double dx = ox - this.x;
-        final double dy = oy - this.y;
+        final double dx = ox - this.xy.getX();
+        final double dy = oy - this.xy.getY();
         final double dis = or + this.r;
 
         final double dx2 = dx * dx;

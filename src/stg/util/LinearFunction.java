@@ -1,19 +1,21 @@
 package stg.util;
 
-public class LinearFunction {
-    private double value;
-    private double gradient;
+public class LinearFunction extends TimeFunction {
+    private double v;
+    private double a;
 
-    public LinearFunction(double value, double gradient) {
-        this.value = value;
-        this.gradient = gradient;
+    public LinearFunction(double v, double a) {
+        this.v = v;
+        this.a = a;
     }
 
-    public void update() {
-        this.value += this.gradient;
+    public LinearFunction(double v, double a, int t) {
+        super(t);
+        this.v = v;
+        this.a = a;
     }
 
-    public double get() {
-        return this.value;
+    public double f(int t) {
+        return this.v + this.a * (double)t;
     }
 }
