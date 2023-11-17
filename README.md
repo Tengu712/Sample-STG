@@ -39,8 +39,62 @@ Windowsユーザは、
 ポリモーフィズムとは、複数種類のオブジェクトを一種類のオブジェクトと見なして扱える性質である。
 考え方として重要なのは、プログラム中で切り替えたいものを、切り替わらないものに置き換える、ということである。
 
-例えば、タイトルシーンやゲームシーンやはプログラム中に切り替えたいものである。
-ポリモーフィズムを用いない場合や、オブジェクト指向の本質をカプセル化だと思っている者は、次のように書いてしまう。
+### Importance of interface
+
+例えば、自機・敵機・自弾・敵弾・障害物の当たり判定を実装するとする。
+ポリモーフィズムを用いない場合や、オブジェクト指向の本質をカプセル化だと思っている者は、次のメソッドを実装することになる。
+
+- Player#isHit(Enemy)
+- Player#isHit(Bullet)
+- Player#isHit(Obstacle)
+- Enemy#isHit(Bullet)
+- Bullet#isHit(Obstacle)
+
+ここに物体の多相性という流動性がある。
+これを例えばHitableインターフェースという非流動的なオブジェクトで置き換える。
+重要なのは、多重定義が減ったことよりも「相手のオブジェクトの種類に依存せず、操作を同じくできる」という点である。
+
+- Player#isHit(Hitable)
+- Enemy#isHit(Hitable)
+- Bullet#isHit(Hitable)
+
+### State/Strategy Pattern
+
+例えば、自機は、プレイヤーの入力によって動かしたいし、リプレイデータによっても動かしたい。
+愚直に実装してしまうと、次のようになる。
+
+```java
+public class Player {
+    private boolean isReplay;
+    public void update() {
+        if (this.isReplay) this.updateWithReplay();
+        else this.updateWithInput();
+    }
+    private void updateWithReplay() {
+    }
+    private void updateWithInput() {
+    }
+}
+```
+
+ここに動き方の多相性という流動性がある。
+これを例えばMoverインターフェースという非流動的なオブジェクトで置き換える。
+外部からMoverを実装したインスタンスを与えれば、Playerはどのような動き方か意識せずに動くことができる。
+
+```java
+public interface Mover {
+    void move();
+}
+public class Player {
+    private Mover mover;
+    public void update() {
+        this.mover.move();
+    }
+}
+```
+
+似た事例に、シーン切替えがある。
+愚直に実装すると次のように書いてしまう。
 
 ```java
     SceneID sceneId = SceneID.Title;
@@ -54,12 +108,14 @@ Windowsユーザは、
     }
 ```
 
-これらタイトルシーン等はシーンという抽象オブジェクトで置き換えられる。
-これは、Stateパターンというよく知られた設計である(各シーンが状態を持たないならばただの関数切替え。Strategyパターンとして知られる)。
+ここにシーンの状態とロジックの多相性という流動性がある。
+これを例えばSceneインターフェースという非流動的なオブジェクトで置き換える。
+今がどのシーンであるかを意識せず、一様にSceneインターフェースを介して操作することができる。
 
 ```java
     Scene scene = new TitleScene();
     scene = scene.update();
 ```
 
-例えば、
+このようなロジックの切替えはState/Strategyパターンとして知られている（状態を持つものがState、状態を持たないものがStrategy）。
+関数型があれば、Strategyパターンは必要ないが、ない場合は個人的に最も有用でわかりやすいデザインパターンだと思っている。
