@@ -2,6 +2,11 @@ package stg.app.entity.collision;
 
 import stg.util.*;
 
+/**
+ * 円状のコライダー。
+ * 
+ * @note 理想的には、インターフェースにして形状の多相性を吸収すべき。
+ */
 public class Collider {
     private Vec2 xy;
     private double r;

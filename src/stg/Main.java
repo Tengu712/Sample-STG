@@ -1,14 +1,16 @@
 package stg;
 
-import javafx.application.Application;
-import javafx.scene.Group;
-import javafx.scene.Scene;
-import javafx.scene.canvas.Canvas;
-import javafx.scene.canvas.GraphicsContext;
-import javafx.stage.Stage;
+import javafx.application.*;
+import javafx.scene.*;
+import javafx.scene.canvas.*;
+import javafx.stage.*;
 
 import stg.app.*;
 
+/**
+ * エントリーポイント。
+ * JavaFXからウィンドウの情報を受け取り・設定し、アプリ(App)を開始する。
+ */
 public class Main extends Application {
     private App app;
 
@@ -17,7 +19,7 @@ public class Main extends Application {
         Scene scene = new Scene(root, 600, 800);
         Canvas canvas = new Canvas(600, 800);
         GraphicsContext g = canvas.getGraphicsContext2D();
-        stage.setTitle("LiveCoding STG");
+        stage.setTitle("Sample STG");
         stage.setResizable(false);
         stage.setScene(scene);
         root.getChildren().add(canvas);
@@ -25,9 +27,5 @@ public class Main extends Application {
 
         this.app = new App(scene, g);
         this.app.start();
-    }
-
-    public void stop() {
-        this.app.terminate();
     }
 }

@@ -2,6 +2,9 @@ package stg.app.entity.animation;
 
 import stg.resource.*;
 
+/**
+ * プレイヤーのアニメーション。
+ */
 public class PlayerAnimator implements Animator {
     private int count;
 
