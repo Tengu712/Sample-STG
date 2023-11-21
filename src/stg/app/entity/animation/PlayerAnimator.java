@@ -4,6 +4,7 @@ import stg.resource.*;
 
 /**
  * プレイヤーのアニメーション。
+ * 3種類の画像を１→２→３→２→１→２……のように2フレームごとに切り替える。
  */
 public class PlayerAnimator implements Animator {
     private int count;
@@ -26,13 +27,5 @@ public class PlayerAnimator implements Animator {
             // unexpected
             default: return Resources.Jiki_0;
         }
-    }
-
-    public double getHalfWidth() {
-        return 12.0;
-    }
-
-    public double getHalfHeight() {
-        return 12.0;
     }
 }

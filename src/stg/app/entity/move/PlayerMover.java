@@ -4,6 +4,9 @@ import stg.app.*;
 import stg.input.*;
 import stg.util.*;
 
+/**
+ * プレイヤーの入力に基づいた動き方。
+ */
 public class PlayerMover implements Mover {
     private App app;
 

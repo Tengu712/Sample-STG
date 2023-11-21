@@ -7,6 +7,12 @@ import stg.app.entity.move.*;
 import stg.resource.*;
 import stg.util.*;
 
+/**
+ * 敵。
+ * 
+ * - 当たり判定の半径：12.0
+ * - 見た目のサイズ：12.0x12.0
+ */
 public class Enemy implements Updatable, Drawable, Hitable {
     private App app;
     private WrappedList<Bullet> ebuls;
@@ -21,15 +27,16 @@ public class Enemy implements Updatable, Drawable, Hitable {
         this.ebuls = ebuls;
         this.xy = new Vec2(x, y);
         this.mover = mover;
-        this.collider = new Collider(this.xy, 8.0);
+        this.collider = new Collider(this.xy, 12.0);
         this.program = program;
         this.isAlive = true;
     }
 
     public boolean update() {
+        if (!isAlive) return false;
         this.program.update(this, this.ebuls);
         this.mover.apply(this.xy);
-        return isAlive && !(this.xy.getX() < -30.0 || this.xy.getX() > 630.0 || this.xy.getY() < -30.0 || this.xy.getY() > 830.0);
+        return !(this.xy.getX() < -30.0 || this.xy.getX() > 630.0 || this.xy.getY() < -30.0 || this.xy.getY() > 830.0);
     }
 
     public double getX() { return this.xy.getX(); }
@@ -51,15 +58,13 @@ public class Enemy implements Updatable, Drawable, Hitable {
             );
     }
 
-    public boolean isHit(Hitable opponent) {
-        return this.collider.isHit(opponent);
+    public boolean hit(Hitable opponent) {
+        final boolean hit = this.collider.hit(opponent);
+        if (hit) this.isAlive = false;
+        return hit;
     }
 
     public Collider getCollider() {
         return this.collider;
-    }
-
-    public void hit() {
-        this.isAlive = false;
     }
 }

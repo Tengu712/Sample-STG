@@ -9,6 +9,12 @@ import stg.app.entity.move.*;
 import stg.input.*;
 import stg.util.*;
 
+/**
+ * プレイヤー。
+ * 
+ * - 当たり判定の半径：8.0
+ * - 見た目のサイズ：12.0x12.0
+ */
 public class Player implements Updatable, Drawable, Hitable {
     private App app;
     private WrappedList<Bullet> pbuls;
@@ -53,8 +59,8 @@ public class Player implements Updatable, Drawable, Hitable {
     public double getY() { return this.xy.getY(); }
 
     public void draw() {
-        final double hw = this.animator.getHalfWidth();
-        final double hh = this.animator.getHalfHeight();
+        final double hw = 12.0;
+        final double hh = 12.0;
         final double x = this.xy.getX() - hw;
         final double y = this.xy.getY() - hh;
         this.app
@@ -68,8 +74,8 @@ public class Player implements Updatable, Drawable, Hitable {
             );
     }
 
-    public boolean isHit(Hitable opponent) {
-        return this.collider.isHit(opponent);
+    public boolean hit(Hitable opponent) {
+        return this.collider.hit(opponent);
     }
 
     public Collider getCollider() {

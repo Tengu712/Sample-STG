@@ -13,7 +13,7 @@ public class Interval {
         this.count = count;
     }
 
-    public void update() {
+    public void incr() {
         this.count += 1;
     }
 

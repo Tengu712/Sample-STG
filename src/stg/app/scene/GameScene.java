@@ -99,7 +99,7 @@ public class GameScene implements Scene {
         //   player and enemy bullets
         for (Bullet n : this.ebuls.get()) {
             if (n == null) continue;
-            if (this.player.isHit(n)) {
+            if (this.player.hit(n)) {
                 return new GameOverScene(this.app, this.score);
             }
         }
@@ -107,8 +107,7 @@ public class GameScene implements Scene {
         for (Bullet n : this.pbuls.get()) {
             if (n == null) continue;
             for (Enemy m : this.enemies.get()) {
-                if (m.isHit(n)) {
-                    m.hit();
+                if (m.hit(n)) {
                     score += 1000;
                 }
             }

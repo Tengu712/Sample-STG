@@ -7,6 +7,12 @@ import stg.app.entity.move.*;
 import stg.resource.*;
 import stg.util.*;
 
+/**
+ * 弾。
+ * 
+ * - 当たり判定の半径：6.0
+ * - 見た目のサイズ：6.0x6.0
+ */
 public class Bullet implements Updatable, Drawable, Hitable {
     private App app;
     private Vec2 xy;
@@ -44,8 +50,8 @@ public class Bullet implements Updatable, Drawable, Hitable {
             );
     }
 
-    public boolean isHit(Hitable opponent) {
-        return this.collider.isHit(opponent);
+    public boolean hit(Hitable opponent) {
+        return this.collider.hit(opponent);
     }
 
     public Collider getCollider() {

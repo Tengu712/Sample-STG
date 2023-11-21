@@ -17,12 +17,4 @@ public interface Animator {
      * 現在のイメージを取得するメソッド。
      */
     Resources get();
-    /**
-     * 現在のイメージの幅の半分を取得するメソッド。
-     */
-    double getHalfWidth();
-    /**
-     * 現在のイメージの高さの半分を取得するメソッド。
-     */
-    double getHalfHeight();
 }

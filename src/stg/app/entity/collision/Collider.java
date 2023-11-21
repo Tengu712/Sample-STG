@@ -2,10 +2,11 @@ package stg.app.entity.collision;
 
 import stg.util.*;
 
+// NOTE: 理想的には、インターフェースにして形状の多相性を吸収すべき。
 /**
  * 円状のコライダー。
  * 
- * @note 理想的には、インターフェースにして形状の多相性を吸収すべき。
+ * コンストラクタで与えられたVec2座標に追従する。
  */
 public class Collider {
     private Vec2 xy;
@@ -16,7 +17,7 @@ public class Collider {
         this.r = r;
     }
 
-    public boolean isHit(Hitable opponent) {
+    public boolean hit(Hitable opponent) {
         final Collider oc = opponent.getCollider();
         final double ox = oc.xy.getX();
         final double oy = oc.xy.getY();

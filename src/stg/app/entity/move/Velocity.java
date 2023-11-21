@@ -2,6 +2,11 @@ package stg.app.entity.move;
 
 import stg.util.*;
 
+/**
+ * 速度に基づいた動き方。
+ * 
+ * 速度の時間変化はTimeFunctionによって与えられる。
+ */
 public class Velocity implements Mover {
     private TimeFunction rad;
     private TimeFunction spd;
