@@ -8,10 +8,9 @@ import stg.app.*;
 import stg.input.*;
 
 public class TitleScene implements Scene {
-    private App app;
-
     private final Font fontTitle;
     private final Font fontGuide;
+    private App app;
 
     public TitleScene(App app) {
         this.app = app;

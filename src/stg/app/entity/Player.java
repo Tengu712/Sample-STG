@@ -13,7 +13,7 @@ import stg.util.*;
  * プレイヤー。
  * 
  * - 当たり判定の半径：8.0
- * - 見た目のサイズ：12.0x12.0
+ * - 見た目の正方形の辺長：24.0
  */
 public class Player implements Updatable, Drawable, Hitable {
     private App app;
@@ -36,19 +36,15 @@ public class Player implements Updatable, Drawable, Hitable {
 
     public boolean update() {
         if (this.app.getKeyState(Keys.Decide) > 0 && this.launchInterval.isIn()) {
-            Bullet bullet = new Bullet(
+            this.pbuls.add(new Bullet(
                 this.app,
                 this.xy.getX(),
                 this.xy.getY(),
-                new Velocity(
-                    new ConstantFunction(Math.toRadians(-90.0)),
-                    new ConstantFunction(20.0)
-                )
-            );
-            this.pbuls.add(bullet);
+                new VelocityMover(Math.toRadians(-90.0), 20.0)
+            ));
             this.launchInterval = new Interval(5, Integer.MAX_VALUE, 1, 0);
         } else {
-            this.launchInterval.update();
+            this.launchInterval.incr();
         }
         this.mover.apply(this.xy);
         this.animator.update();

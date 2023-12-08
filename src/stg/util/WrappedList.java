@@ -2,6 +2,8 @@ package stg.util;
 
 import java.util.*;
 
+// NOTE: 配列のフィルタリングで配列の再生成・置換を行う場合は、置換前の配列が無効になってしまう。
+//       それを防ぐために、置換をこのインスタンスに隠蔽する。
 public class WrappedList<T> {
     private List<T> list;
 

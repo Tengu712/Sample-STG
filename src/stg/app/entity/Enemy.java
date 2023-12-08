@@ -4,6 +4,7 @@ import stg.app.*;
 import stg.app.entity.animation.*;
 import stg.app.entity.collision.*;
 import stg.app.entity.move.*;
+import stg.app.entity.program.*;
 import stg.resource.*;
 import stg.util.*;
 
@@ -11,7 +12,7 @@ import stg.util.*;
  * 敵。
  * 
  * - 当たり判定の半径：12.0
- * - 見た目のサイズ：12.0x12.0
+ * - 見た目の正方形の辺長：24.0
  */
 public class Enemy implements Updatable, Drawable, Hitable {
     private App app;
@@ -34,7 +35,7 @@ public class Enemy implements Updatable, Drawable, Hitable {
 
     public boolean update() {
         if (!isAlive) return false;
-        this.program.update(this, this.ebuls);
+        this.program.run(this, this.ebuls);
         this.mover.apply(this.xy);
         return !(this.xy.getX() < -30.0 || this.xy.getX() > 630.0 || this.xy.getY() < -30.0 || this.xy.getY() > 830.0);
     }

@@ -11,7 +11,7 @@ import stg.util.*;
  * 弾。
  * 
  * - 当たり判定の半径：6.0
- * - 見た目のサイズ：6.0x6.0
+ * - 見た目の正方形の辺長：12.0
  */
 public class Bullet implements Updatable, Drawable, Hitable {
     private App app;
